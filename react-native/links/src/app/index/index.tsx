@@ -1,4 +1,5 @@
 import { Categories } from "@/components/categories";
+import { Link } from "@/components/link";
 import { colors } from "@/styles/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Image, TouchableOpacity, View } from "react-native";
@@ -16,6 +17,11 @@ const Index = () => {
       </View>
 
       <Categories />
+      <Link
+        name="Rocketseat"
+        url="https://www.rocketseat.com.br/"
+        onDetails={() => console.log("Clicou")}
+      />
     </View>
   );
 };
