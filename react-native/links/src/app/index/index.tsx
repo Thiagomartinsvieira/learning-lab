@@ -1,6 +1,5 @@
-import { Category } from "@/components/category";
+import { Categories } from "@/components/categories";
 import { colors } from "@/styles/colors";
-import { categories } from "@/utils/categories";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Image, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
@@ -16,13 +15,7 @@ const Index = () => {
         </TouchableOpacity>
       </View>
 
-      <Category
-        name={categories[0].name}
-        icon={categories[0].icon}
-        isSelected
-      />
-      <Category name="Site" icon="language" isSelected={false} />
-      <Category name="Video" icon="movie" isSelected={false} />
+      <Categories />
     </View>
   );
 };
