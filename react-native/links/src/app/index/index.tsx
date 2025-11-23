@@ -15,7 +15,9 @@ const Index = () => {
         </TouchableOpacity>
       </View>
 
-      <Category />
+      <Category name="Projects" icon="code" />
+      <Category name="Site" icon="language" />
+      <Category name="Video" icon="movie" />
     </View>
   );
 };
