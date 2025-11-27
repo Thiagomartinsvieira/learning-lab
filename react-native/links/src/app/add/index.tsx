@@ -1,3 +1,5 @@
+import { Categories } from "@/components/categories";
+import { Input } from "@/components/input";
 import { colors } from "@/styles/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -13,7 +15,12 @@ export default function Add() {
         </TouchableOpacity>
 
         <Text style={styles.title}>Novo</Text>
-        <Text style={styles.label}>Selecione uma categoria</Text>
+      </View>
+      <Text style={styles.label}>Selecione uma categoria</Text>
+      <Categories />
+      <View style={styles.form}>
+        <Input placeholder="Nome" />
+        <Input placeholder="URL" />
       </View>
     </View>
   );
