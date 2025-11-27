@@ -1,5 +1,6 @@
 import { Categories } from "@/components/categories";
 import { Link } from "@/components/link";
+import { Option } from "@/components/option";
 import { colors } from "@/styles/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
@@ -14,7 +15,7 @@ import { styles } from "./styles";
 
 const Index = () => {
   return (
-    <View style={styles.constainer}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Image source={require("@/assets/logo.png")} style={styles.logo} />
 
@@ -55,8 +56,12 @@ const Index = () => {
             </View>
 
             <Text style={styles.modalLinkName}>Rocketseat</Text>
-
             <Text style={styles.modalUrl}>https://www.rocketseat.com.br/</Text>
+
+            <View style={styles.modalFooter}>
+              <Option name="Excluir" icon="delete" variant="secondary" />
+              <Option name="Abrir" icon="language" />
+            </View>
           </View>
         </View>
       </Modal>
