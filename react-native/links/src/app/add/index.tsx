@@ -1,6 +1,7 @@
 import { Button } from "@/components/button";
 import { Categories } from "@/components/categories";
 import { Input } from "@/components/input";
+import { LinkStorage } from "@/storage/link-storage";
 import { colors } from "@/styles/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -13,20 +14,35 @@ export default function Add() {
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
 
-  function handleAdd() {
-    if (!category) {
-      return Alert.alert("Category", "Select the category");
-    }
+  async function handleAdd() {
+    try {
+      if (!category) {
+        return Alert.alert("Category", "Select the category");
+      }
 
-    if (!name.trim()) {
-      return Alert.alert("Name", "Please provider the name");
-    }
+      if (!name.trim()) {
+        return Alert.alert("Name", "Please provider the name");
+      }
 
-    if (!url.trim()) {
-      return Alert.alert("URL", "Please provider the URL");
-    }
+      if (!url.trim()) {
+        return Alert.alert("URL", "Please provider the URL");
+      }
 
-    console.log({ category, name, url });
+      await LinkStorage.save({
+        id: new Date().getTime().toString(),
+        name,
+        url,
+        category,
+      });
+
+      const data = await LinkStorage.get();
+      console.log(data);
+
+      // console.log({ category, name, url });
+    } catch (error) {
+      Alert.alert("Error", "Do not possible save the link");
+      console.error(error);
+    }
   }
 
   return (
@@ -42,7 +58,12 @@ export default function Add() {
       <Categories onChange={setCategory} selected={category} />
       <View style={styles.form}>
         <Input placeholder="Name" onChangeText={setName} autoCorrect={false} />
-        <Input placeholder="URL" onChangeText={setUrl} autoCorrect={false} />
+        <Input
+          placeholder="URL"
+          onChangeText={setUrl}
+          autoCorrect={false}
+          autoCapitalize="none"
+        />
         <Button title="Add" onPress={handleAdd} />
       </View>
     </View>
