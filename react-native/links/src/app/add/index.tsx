@@ -5,7 +5,7 @@ import { colors } from "@/styles/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 
 export default function Add() {
@@ -14,7 +14,19 @@ export default function Add() {
   const [url, setUrl] = useState("");
 
   function handleAdd() {
-    console.log({ name, url });
+    if (!category) {
+      return Alert.alert("Category", "Select the category");
+    }
+
+    if (!name.trim()) {
+      return Alert.alert("Name", "Please provider the name");
+    }
+
+    if (!url.trim()) {
+      return Alert.alert("URL", "Please provider the URL");
+    }
+
+    console.log({ category, name, url });
   }
 
   return (
@@ -29,9 +41,9 @@ export default function Add() {
       <Text style={styles.label}>Selecione uma categoria</Text>
       <Categories onChange={setCategory} selected={category} />
       <View style={styles.form}>
-        <Input placeholder="Nome" onChangeText={setName} autoCorrect={false} />
+        <Input placeholder="Name" onChangeText={setName} autoCorrect={false} />
         <Input placeholder="URL" onChangeText={setUrl} autoCorrect={false} />
-        <Button title="Adicionar" onPress={handleAdd} />
+        <Button title="Add" onPress={handleAdd} />
       </View>
     </View>
   );
