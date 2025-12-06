@@ -11,6 +11,7 @@ import {
   Alert,
   FlatList,
   Image,
+  Linking,
   Modal,
   Text,
   TouchableOpacity,
@@ -60,6 +61,15 @@ const Index = () => {
       },
       { text: "Yes", onPress: linkRemove },
     ]);
+  }
+
+  async function handleOpen() {
+    try {
+      await Linking.openURL(link.url);
+    } catch (error) {
+      Alert.alert("Link", "The link could not be opened");
+      console.error(error);
+    }
   }
 
   useFocusEffect(
@@ -117,7 +127,7 @@ const Index = () => {
                 variant="secondary"
                 onPress={handleRemove}
               />
-              <Option name="Abrir" icon="language" />
+              <Option name="Abrir" icon="language" onPress={handleOpen} />
             </View>
           </View>
         </View>
