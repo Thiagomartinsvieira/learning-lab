@@ -66,6 +66,7 @@ const Index = () => {
   async function handleOpen() {
     try {
       await Linking.openURL(link.url);
+      setShowModal(false);
     } catch (error) {
       Alert.alert("Link", "The link could not be opened");
       console.error(error);
