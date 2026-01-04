@@ -1,7 +1,8 @@
+import { router } from "expo-router";
 import { createContext, PropsWithChildren, useState } from "react";
 
 type AuthState = {
-  isLogged: boolean;
+  isLoggedIn: boolean;
   signIn: () => void;
   signOut: () => void;
 };
@@ -9,13 +10,21 @@ type AuthState = {
 export const AuthContext = createContext<AuthState>({} as AuthState);
 
 export function AuthProvider({ children }: PropsWithChildren) {
-  const [isLoggedIn, setIsLOggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const signIn = () => {
-    setIsLOggedIn(true);
+    setIsLoggedIn(true);
+    router.replace("/");
   };
 
-   const signOut = () => {
-    setIsLOggedIn(false);
+  const signOut = () => {
+    setIsLoggedIn(false);
+    router.replace("/signIn");
   };
+
+  return (
+    <AuthContext.Provider value={{ isLoggedIn, signIn, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
